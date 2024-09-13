@@ -2,6 +2,15 @@ FROM python:3-slim
 
 WORKDIR /app
 
+# Installer les dépendances nécessaires pour compiler des paquets Python
+RUN apt-get update && \
+    apt-get install -y \
+    build-essential \
+    pkg-config \
+    libhdf5-dev && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
 # Copier les fichiers de dépendances
 COPY requirements.txt .
 # Installer les dépendances
